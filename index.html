@@ -1,46 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <script src="js/vue.js"></script>
     <title>Document</title>
 </head>
-<body>
-    <div id="app">
-        {{ message }}
-      </div>
-      <div id="app-2">
-        <span v-bind:title="message">
-          Hover your mouse over me for a few seconds
-          to see my dynamically bound title!
-        </span>
-      </div>
-      <div id="app-3">
-        <span v-if="seen">Now you see me</span>
-      </div>
-      <div id="app-4">
-        <ol>
-          <li v-for="todo in todos">
-            {{ todo.text }}
-          </li>
-        </ol>
-      </div>
-      <div id="app-5">
-        <p>{{ message }}</p>
-        <button v-on:click="reverseMessage">Reverse Message</button>
-      </div>
-      <div id="app-6">
-        <p>{{ message }}</p>
-        <input v-model="message">
-      </div>
 
-      <ol>
-        <!-- Create an instance of the todo-item component -->
-        <todo-item></todo-item>
-      </ol>
-      
+<body>
+    <main>
+        <div class="cardContainer">
+            <div class="card">
+                <p class="preview">
+                    Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].
+                </p>
+                <div class="contentButtons">
+                    <button>Share</button>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+            <div class="card">
+                <p class="preview">
+                    Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].
+                </p>
+                <div class="contentButtons">
+                    <button>Share</button>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+            <div class="card">
+                <p class="preview">
+                    Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].
+                </p>
+                <div class="contentButtons">
+                    <button>Share</button>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+            <div class="card">
+                <p class="preview">
+                    Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].
+                </p>
+                <div class="contentButtons">
+                    <button>Share</button>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+            <div class="card storySetup edit" id="storySetup">
+                <p class="preview" id="preview">{{ template }}</p>
+                <input class="templateInput" type="text" v-model="template">
+                <div class="tools">
+                    <button>save</button>
+                    <div class="field">
+                        <label>roll: </label><input v-model="role">
+                        <a>X</a>
+                    </div>
+                    <a v-on:click="addField">+</a>
+                </div>
+            </div>
+            <div id="addProjectButton">
+                <span v-bind:title="message">
+                    <button v-on:click="addNewStory">+</button>
+            </div>
+        </div>
+
+    </main>
     <script src="js/main.js"></script>
 </body>
+
 </html>

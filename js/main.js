@@ -1,64 +1,26 @@
-var app = new Vue({
-    el: '#app',
+var addProjectButton = new Vue({
+    el: '#addProjectButton',
     data: {
-      message: 'Hello Vue!'
-    }
-  })
-
-  var app2 = new Vue({
-    el: '#app-2',
-    data: {
-      message: 'You loaded this page on ' + new Date().toLocaleString()
-    }
-  })
-
-  var app3 = new Vue({
-    el: '#app-3',
-    data: {
-      seen: true
-    }
-  })
-
-  // Define a new component called todo-item
-  Vue.component('todo-item', {
-    template: '<li>This is a todo</li>'
-  })
-  
-
-  var app4 = new Vue({
-    el: '#app-4',
-    data: {
-      todos: [
-        { text: 'Learn JavaScript' },
-        { text: 'Learn Vue' },
-        { text: 'Build something awesome' }
-      ]
-    }
-  })
-
-  var app5 = new Vue({
-    el: '#app-5',
-    data: {
-      message: 'Hello Vue.js!'
+        message: 'Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].'
     },
     methods: {
-      reverseMessage: function () {
-        this.message = this.message.split('').reverse().join('')
-      }
-    }
-  })
+        addNewStory: function () {
 
-  var app6 = new Vue({
-    el: '#app-6',
+        }
+    }
+})
+
+var storySetup = new Vue({
+    el: '#storySetup',
     data: {
-      message: 'Hello Vue!'
+        template: `Som en elev vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].`,
+        role: ''
     }
-  })
+})
 
-  Vue.component('todo-item', {
-    // The todo-item component now accepts a
-    // "prop", which is like a custom attribute.
-    // This prop is called todo.
-    props: ['todo'],
-    template: '<li>{{ todo.text }}</li>'
-  })
+var fields = new Vue({
+    el: '#fields',
+    data: {
+        role: 'elev'
+    }
+})
