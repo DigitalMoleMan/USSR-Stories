@@ -11,38 +11,22 @@
 </head>
 
 <body>
-    <main>
-        <div class="cardContainer">
-            <div class="card">
-                <p class="preview">
-                    Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].
-                </p>
-                <div class="contentButtons">
-                    <button>Share</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-            </div>
-            <div class="card">
-                <p class="preview">
-                    Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].
-                </p>
-                <div class="contentButtons">
-                    <button>Share</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-            </div>
-            <div class="card">
-                <p class="preview">
-                    Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].
-                </p>
-                <div class="contentButtons">
-                    <button>Share</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </div>
-            </div>
+    <main id="app">
+            
+        <cardlist>
+            <storycard v-for="index in stories" v-bind:story="index"></storycard>
+            <editstorycard>
+                    <storyinput v-on:keydown="base"></storyinput>
+            </editstorycard>
+            <newstory-button></newstory-button>
+        </cardlist>
+
+
+        <!--
+        <div class="cardContainer" id="cardContainer">
+                <story text="Som en {{ role }} vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].">
+                </story>
+                <story-setup></story-setup>
             <div class="card">
                 <p class="preview">
                     Som en [ROLL] vill jag [AKTIVITET] i [SAMMANHANG] för att [ORSAK].
@@ -54,23 +38,24 @@
                 </div>
             </div>
             <div class="card storySetup edit" id="storySetup">
-                <p class="preview" id="preview">{{ template }}</p>
-                <input class="templateInput" type="text" v-model="template">
+                <p class="preview"></p>
+                <input class="templateInput" type="text">
                 <div class="tools">
-                    <button>save</button>
                     <div class="field">
-                        <label>roll: </label><input v-model="role">
+                        <div contenteditable="true"></div><a>:</a><div contenteditable="true"></div>
                         <a>X</a>
                     </div>
-                    <a v-on:click="addField">+</a>
+                    <a>+</a>
+
+                    
                 </div>
+                <button>save</button>
             </div>
             <div id="addProjectButton">
-                <span v-bind:title="message">
-                    <button v-on:click="addNewStory">+</button>
+                    <button onClick="addNewStory()">+</button>
             </div>
         </div>
-
+        -->
     </main>
     <script src="js/main.js"></script>
 </body>
