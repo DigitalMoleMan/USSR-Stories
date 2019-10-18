@@ -1,8 +1,11 @@
 
 class Story{
-    constructor(){
-        this.templateStr = '';
-        this.fields = [];
+    constructor(story = {
+        templateStr: '',
+        fields: []
+    }){
+        this.templateStr = story.templateStr;
+        this.fields = story.fields;
         return this;
     }
 }
@@ -150,9 +153,7 @@ var app = new Vue({
                     var storyText = this.story.templateStr;
                     var storyFields = this.story.fields;
     
-                    for (field of storyFields) {
-                        storyText = storyText.replace(field.link, field.value);
-                    }
+                    for (field of storyFields) storyText = storyText.replace(field.link, field.value);
                     return storyText
                 },
                 editCard: function () {
@@ -188,7 +189,7 @@ var app = new Vue({
                     story: this.$parent.$parent.story
                 }
             },
-            template: '<div><input class="input" v-model="story.templateStr"></input></div>',
+            template: '<div><input class="input" v-model="story.templateStr" placeholder="use _ before a word to define a field."></input></div>',
         },
         'storyfieldinput': {
             data: function () {
