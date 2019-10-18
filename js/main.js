@@ -1,5 +1,11 @@
 
-
+class Story{
+    constructor(){
+        this.templateStr = '';
+        this.fields = [];
+        return this;
+    }
+}
 /*
 addNewStory = () => {
     // Define a new component
@@ -85,7 +91,7 @@ const defaultData = {
                 },
                 {
                     link: '_aktivitet',
-                    value: 'tända eld'
+                    value: 'jobba mer'
                 },
                 {
                     link: '_sammanhang',
@@ -120,6 +126,7 @@ var data = loadData()
 var app = new Vue({
     el: '#app',
     data: function () {
+        console.log(data.stories)
         return {
             stories: data.stories
         }
@@ -127,41 +134,69 @@ var app = new Vue({
 
     components: {
         'cardlist': {
-            template: '<div class="cardContainer"><slot></slot></div>',
+            template: '<div class="cardContainer" ><slot></slot></div>',
         },
         'storycard': {
             props: ['story'],
-            data: function () {
-                var storyText = this.story.templateStr;
-                var storyFields = this.story.fields;
-
-                for (field of storyFields) {
-                    storyText = storyText.replace(field.link, field.value);
-                }
-                return {
-                    text: storyText
-                }
-            },
-            template: '<div class="card story"><p class="preview">{{ text }}</p></div>'
-        },
-        'editstorycard': {
-            template: '<div class="card edit"><slot></slot></div>'
-        },
-        'newstory-button': {
-            template: '<a class="card newStoryButton"><div class="newStory"><a>+</a></div></a>',
+            template: `
+            <div class="card story">
+                <p class="preview">{{ getText() }}</p>
+                <slot></slot>
+                <button v-on:click="editCard">edit</button>
+            </div>`,
             methods: {
-                addNewStory: () => { }
+                getText: function () {
+                    console.log(this)
+                    var storyText = this.story.templateStr;
+                    var storyFields = this.story.fields;
+    
+                    for (field of storyFields) {
+                        storyText = storyText.replace(field.link, field.value);
+                    }
+                    return storyText
+                },
+                editCard: function () {
+                    this.$el.className = 'card edit';
+                    console.log(this.$el)
+                },
+
+                saveEdit: function () {
+                    saveData();
+                    console.log(this)
+                    this.$el.className = 'card story';
+
+                }
             }
         },
-        'storyinput': {
-            props: ['basestr'],
-            
-            template: '<div id="baseIn" class="input" contenteditable="true">a</div>',
+        'editpanel': {
+            template: '<div class="editpanel"><slot></slot><button class="save" v-on:click="$parent.saveEdit">save</button></div>',
+        },
+        
+        'newstory-button': {
+            template: '<a class="card newStoryButton" v-on:click="newStory"><div class="newStory"><a>+</a></div></a>',
             methods: {
-                base: function () {
-                    console.log(this.$el.innerHTML)
+                newStory: () => { 
+                    data.stories.push(new Story());
+                    saveData()
+                },
+
+            }
+        },
+        'storybaseinput': {
+            data: function () {
+                return {
+                    story: this.$parent.$parent.story
                 }
             },
+            template: '<div><input class="input" v-model="story.templateStr"></input></div>',
+        },
+        'storyfieldinput': {
+            data: function () {
+                return {
+                    fields: this.$parent.$parent.story.fields
+                }
+            },
+            template: '<div><input class="input" v-for="index in fields" v-model="index.value" v-bind:placeholder="index.link"></input></div>',
         }
 
         /* ,

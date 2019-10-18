@@ -14,10 +14,13 @@
     <main id="app">
             
         <cardlist>
-            <storycard v-for="index in stories" v-bind:story="index"></storycard>
-            <editstorycard>
-                    <storyinput v-on:keydown="base"></storyinput>
-            </editstorycard>
+            <storycard  v-for="index in stories" v-bind:story="index">
+
+                <editpanel >
+                    <storybaseinput></storybaseinput>
+                    <storyfieldinput ></storyfieldinput>
+                </editpanel>
+            </storycard>
             <newstory-button></newstory-button>
         </cardlist>
 
